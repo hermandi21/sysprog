@@ -1,20 +1,23 @@
+//
+// Created by hermann.andreas on 25.05.23.
+//
+
+
+//Folie 5-35
 #include "fachnoten_liste.h"
 
-//----------------------------------------------------- Klasse fachnoten_liste::element
+//---------------------------------------Member-Funktion fachnote_liste::element
 class fachnoten_liste::element final
 {
     element *next;
     fachnote* f;
 
-    element(element *e, fachnote* fn)
-            : next(e), f(fn)
+    element(element *e, fachnote* m) : next(e), f(m)
     { }
-
     friend class fachnoten_liste;
     friend class fachnoten_liste::iterator;
 };
-
-//----------------------------------------- Member-Funktionen fachnoten_liste::iterator
+//------------------------------------------------------- Member-Funktionen fachnoten_liste::iterator
 fachnoten_liste::iterator::iterator(element *e)
         : current(e)
 { }
@@ -35,15 +38,21 @@ fachnoten_liste::iterator& fachnoten_liste::iterator::operator++()
     return *this;
 }
 
-//--------------------------------------------------- Member-Funktionen fachnoten_liste
-fachnoten_liste::fachnoten_liste(void (*vFunctionCall)(fachnote*))
-        : head(nullptr), vFunctionCall(vFunctionCall)
+//-------------------------------------------------------- Member-Funktion fachnote_liste
+
+//Ab c11 schreibt man nullptr statt NULL
+fachnoten_liste::fachnoten_liste(void (*)(fachnote *))
+                                    //^ VON der IDE vorgeschlagen
+: head(nullptr)
 { }
 
+//Destruktor
+//fachnoten_liste::insert wird Heapspeicher für die Listenelemente allokiert,
+// dieser wird hier im Destruktor wieder freigegeben
 fachnoten_liste::~fachnoten_liste()
 {
     element *e = this->head;
-    while (e != nullptr)
+    while(e != nullptr)
     {
         element *x = e;
         e = e->next;
@@ -51,11 +60,30 @@ fachnoten_liste::~fachnoten_liste()
     }
 }
 
+//alte insert-Methode
 fachnoten_liste& fachnoten_liste::insert(fachnote* f)
 {
     this->head = new element(this->head, f);
     return *this;
 }
+
+/*//insert-Methode welche aufsteigend im Wert einfügt
+fachnoten_liste& fachnoten_liste::insert(fachnote* f)
+{
+    element* current = head;
+    if(head == nullptr || *f < *(head->f))
+    {
+        head = new element(head, f);
+    }
+    else
+    {
+        element* current = head;
+        while (current->next != nullptr && !((f* < current->next->f)))
+        {
+
+        }
+    }
+}*/
 
 fachnoten_liste::iterator fachnoten_liste::begin()
 {
@@ -66,3 +94,5 @@ fachnoten_liste::iterator fachnoten_liste::end()
 {
     return fachnoten_liste::iterator(nullptr);
 }
+
+

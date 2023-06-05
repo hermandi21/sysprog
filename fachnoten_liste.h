@@ -1,5 +1,5 @@
 //
-// Created by hermandi on 25.05.23.
+// Created by hermann.andreas on 25.05.23.
 //
 
 #ifndef SYSPROG_FACHNOTEN_LISTE_H
@@ -8,7 +8,7 @@
 #include "fachnote.h"
 
 
-class fachnoten_liste
+class fachnoten_liste final
 {
 private:
     class element;
@@ -28,6 +28,8 @@ public:
     fachnoten_liste(const fachnoten_liste&&) = delete;
     fachnoten_liste& operator=(fachnoten_liste&&) = delete;
 
+    //wichtig
+    fachnoten_liste& insert(fachnote*);
 
     //Iterator
     class iterator final
@@ -43,6 +45,7 @@ public:
         friend class fachnoten_liste;
     };
 
+    //Fabrikfunktionen für Iteratoren (müssen so heißen)
     iterator begin();
     iterator end();
 };

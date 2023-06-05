@@ -1,5 +1,5 @@
 //
-// Created by hermandi on 25.05.23.
+// Created by hermann.andreas on 25.05.23.
 //
 
 #ifndef SYSPROG_FACHNOTE_H

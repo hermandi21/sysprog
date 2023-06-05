@@ -1,5 +1,5 @@
 //
-// Created by hermandi on 25.05.23.
+// Created by hermann.andreas on 25.05.23.
 //
 
 //Übersetzungseinheit "benotung" mit gleichnamiger Wertklasse
@@ -40,8 +40,8 @@ benotung::benotung(int note)
     }
 
 
-//Destruktor Implementation
-benotung::~benotung(int) {}
+/*//Destruktor Implementation
+benotung::~benotung() {}*/
 
 //Implementierung: eine öffentliche Memberfunktion int int_value(), die die im Objekt gekapselte Note liefert
 int benotung::int_value() const
@@ -63,4 +63,8 @@ bool operator==(const benotung& b1, const benotung& b2)
     return b1.int_value() == b2.int_value();
 }
 
+bool operator<(const benotung& b1, const benotung& b2)
+{
+    return b1.int_value() < b2.int_value();
+}
 
