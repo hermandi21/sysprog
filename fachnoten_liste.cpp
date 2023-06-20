@@ -41,9 +41,8 @@ fachnoten_liste::iterator& fachnoten_liste::iterator::operator++()
 //-------------------------------------------------------- Member-Funktion fachnote_liste
 
 //Ab c11 schreibt man nullptr statt NULL
-fachnoten_liste::fachnoten_liste(void (*)(fachnote *))
-                                    //^ VON der IDE vorgeschlagen
-: head(nullptr)
+fachnoten_liste::fachnoten_liste(void (*functionPointer)(fachnote*))
+        : head(nullptr), functionPointer(functionPointer)
 { }
 
 //Destruktor
@@ -52,10 +51,14 @@ fachnoten_liste::fachnoten_liste(void (*)(fachnote *))
 fachnoten_liste::~fachnoten_liste()
 {
     element *e = this->head;
-    while(e != nullptr)
+    while (e != nullptr)
     {
         element *x = e;
         e = e->next;
+
+        //Um das Speicherleck zu schließen
+        functionPointer(x->f);
+
         delete x;
     }
 }

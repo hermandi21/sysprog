@@ -7,6 +7,7 @@
 
 #include "fachnote.h"
 
+typedef void (*functionPointer)();
 
 class fachnoten_liste final
 {
@@ -14,10 +15,12 @@ private:
     class element;
     element *head;
 
+    //Um speicherleck zu schließen
+    void (*functionPointer)(fachnote*);
 
 public:
     //statt eines Standardkonstruktors soll es einen expliziten Konstruktor mit einem Parameter geben
-    explicit fachnoten_liste(void(fachnote*));
+    explicit fachnoten_liste(void (fachnote*));
     //Destruktor
     ~fachnoten_liste();
 
@@ -37,6 +40,7 @@ public:
     private:
         element *current;
         explicit iterator(element*);
+
     public:
         bool operator!=(const iterator&) const;
         fachnote*& operator*() const;
