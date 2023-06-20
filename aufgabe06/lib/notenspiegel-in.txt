@@ -1,0 +1,6 @@
+
+Systemmodellierung 50
+Mathematik1 37
+Programmiertechnik1 23
+Digitaltechnik 10
+

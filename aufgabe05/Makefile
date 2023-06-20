@@ -29,8 +29,8 @@ $(TARGET): $(TARGET).o $(OBJECTS)
 cppcheck: $(TARGET).cpp $(OBJECTS:.o=.cpp)
 	$(CPPCHECK) $^
 
-benotung.o: benotung.cpp benotung.h
-fachnote.o: fachnote.cpp fachnote.h benotung.h
-fachnoten_liste.o: fachnoten_liste.cpp fachnoten_liste.h fachnote.h benotung.h
-notenspiegel.o: notenspiegel.cpp fachnoten_liste.h fachnote.h benotung.h
+benotung.o: benotung.cpp aufgabe05/benotung.h
+fachnote.o: fachnote.cpp aufgabe05/fachnote.h aufgabe05/benotung.h
+fachnoten_liste.o: fachnoten_liste.cpp aufgabe05/fachnoten_liste.h aufgabe05/fachnote.h aufgabe05/benotung.h
+notenspiegel.o: notenspiegel.cpp aufgabe05/fachnoten_liste.h aufgabe05/fachnote.h aufgabe05/benotung.h
 
