@@ -1,3 +1,7 @@
+#
+# Makefile
+#
+
 #bin
 CXX = g++ -g #-fno-elide-constructors
 CXXFLAGS = -I$(LIBRARY) -Wall -Wextra -Werror -std=$(STD) -pedantic
@@ -7,6 +11,7 @@ LIBRARY=../lib/
 LDLIBS=-l$(LIBNAME)
 LIBTYPE = a
 LIBNAME = aufgabe6
+RM = rm -f
 
 TARGET = notenspiegel
 
@@ -23,7 +28,7 @@ OBJECTS = $(TARGET).o
 all: $(TARGET)
 
 clean:
-	rm -f $(TARGET) $(OBJECTS) depend
+	$(RM) $(TARGET) $(OBJECTS) depend
 
 $(TARGET): $(OBJECTS) $(LIBRARY)lib$(LIBNAME).$(LIBTYPE)
 	$(CXX) $(LDFLAGS) $(CXXFLAGS) $< $(LDLIBS) -o $@

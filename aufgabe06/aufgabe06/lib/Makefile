@@ -4,14 +4,16 @@
 
 #lib
 CXX = g++ -g #-fno-elide-constructors
-CXXFLAGS = -Wall -Wextra - Werror -Weffc++ -Wold-style-cast -std=$(STD) -pedantic
+CXXFLAGS = -fPIC -Wall -Wextra -Werror -Weffc++ -Wold-style-cast -std=$(STD) -pedantic
 STD = c++11
-STATIC = ar crs
-DYNAMIC = g++ shared -o
+STATIC = ar rcs
+DYNAMIC = g++ -shared
 
 TARGET = lib$(LIBNAME).$(LIBTYPE)
-LIBNAME = aufgabe6
 LIBTYPE = a
+LIBNAME = aufgabe6
+RM = rm -f
+
 
 SOURCES = \
 		benotung.cpp \
@@ -23,10 +25,9 @@ OBJECTS = $(SOURCES:.cpp=.o)
 
 .PHONY: all clean	#unechte Ziele, sog. pseudoziele
 
-all:
-		lib$(LIBNAME).$(LIBTYPE)
+all: lib$(LIBNAME).$(LIBTYPE)	#Hier der Fehler dass ich "make -R" nicht ausführen konnte weil
 clean:
-		rm -f lib$(LIBNAME).a lib$(LIBNAME).so $(OBJECTS) depend
+		$(RM) lib$(LIBNAME).a lib$(LIBNAME).so $(OBJECTS) depend
 
 # eine explizite Regel zum Erstellen der statischen Bibliothek
 lib$(LIBNAME).a : $(OBJECTS)
@@ -39,12 +40,11 @@ lib$(LIBNAME).so : $(OBJECTS)
 	$(DYNAMIC) $(CXXFLAGS) -o $@ $^
 						#	   ^Hier ist es auch das Ziel auf das es angewendet wird, in diesem Fall dann die .so-Datei
 
-%.o: %.cpp
+%.o:%.cpp
 	$(CXX) $(CXXFLAGS) -c $<
 						# ^ ist die Quelle auf die die Regel angewendet wird, in dem Fall dann die .cpp-Dateien
 
-depend:
-		$(SOURCES) $(HEADERS)
+depend:	$(SOURCES) $(HEADERS)
 		$(CXX) $(CXXFLAGS) -MM $(SOURCES) > $@
 							#^
 							# Das MM schreibt die Regeln mittels Umlenkung der Standardausgabe in die Datei depend,
