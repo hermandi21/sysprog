@@ -1,0 +1,22 @@
+./filesize xxx *
+
+ Kommt für die nicht existierende Datei xxx die gleiche Fehlermeldung?
+ -> Ja
+
+  In welcher Sprache erscheint die Systemmeldung?
+  -> englisch
+
+ In welcher Sprache erscheinen jetzt die Fehlermeldungen von filesize und ls?
+ ->Nachdem man auf de_DE.utf8 gesetzt hat bekommt man sie auf deutsch
+
+
+
+(base) [hermandi@archlinux aufgabe07]$   ./filesize xxx *
+bash: ./filesize: Datei oder Verzeichnis nicht gefunden
+(base) [hermandi@archlinux aufgabe07]$   ls -l xxx *
+ls: Zugriff auf 'xxx' nicht möglich: Datei oder Verzeichnis nicht gefunden
+-rw-r--r-- 1 hermandi hermandi  312 26. Jun 15:47 aufgabe07-protokoll.txt
+-rw-r--r-- 1 hermandi hermandi 2798 26. Jun 15:39 filecopy.c
+-rw-r--r-- 1 hermandi hermandi 1260 26. Jun 15:27 filesize.c
+-rw-r--r-- 1 hermandi hermandi  338 26. Jun 14:22 Makefile
+(base) [hermandi@archlinux aufgabe07]$
