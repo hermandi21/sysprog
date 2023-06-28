@@ -9,6 +9,8 @@ RM = rm -f
 TARGET = \
 		filesize \
 		filecopy \
+		a.out \
+		filecopy-kopie \
 
 .PHONY: all clean cppcheck
 

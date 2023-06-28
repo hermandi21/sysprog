@@ -2,7 +2,7 @@ PACKAGES=lib bin
 
 .PHONY: all clean
 
-#Wird hier $$p die Variable p genommen
+#Warum wird hier $$p die Variable p genommen -- weil hier make und shell Sprache zusammentreffen und es ansonsten einen Fehler geben würde
 all clean:
 		for p in $(PACKAGES) ; do \
 				(cd $$p && $(MAKE) $@ ) ; \
